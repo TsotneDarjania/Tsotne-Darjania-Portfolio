@@ -1,0 +1,173 @@
+.skills {
+  width: 100vw;
+
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: column;
+
+  margin-top: 150px;
+
+  max-width: 1600px;
+}
+
+.title {
+  font-size: 4rem;
+  font-weight: 600;
+  color: rgb(26, 179, 46);
+  margin: 20px 0;
+
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.content {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+}
+
+.textContent {
+  display: flex;
+  width: 50%;
+
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.skillDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 5px;
+
+  font-size: 2.5rem;
+
+  background-color: rgb(85, 216, 68);
+  border-radius: 30px;
+  padding: 20px;
+
+  color: rgb(255, 255, 255);
+
+  font-weight: bold;
+}
+
+.skillDiv img {
+  width: 48px;
+}
+
+.downloadButton {
+  padding-top: 5px;
+  padding-bottom: 14px;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  border-radius: 7px;
+
+  margin-top: 30px;
+
+  font-size: 2.2rem;
+
+  background-color: rgb(19, 57, 82);
+  color: white;
+  border: 6px rgb(206, 206, 206);
+  border-style: double;
+
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 1000px) {
+  .skills {
+    width: 100vw;
+
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column;
+
+    margin-top: 20px;
+
+    max-width: 1600px;
+  }
+
+  .title {
+    font-size: 3.5rem;
+    font-weight: 600;
+    color: rgb(26, 179, 46);
+    margin: 20px 0;
+
+    font-weight: bold;
+    letter-spacing: 2px;
+  }
+
+  .content {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .computerAnimation {
+    scale: 0.7;
+    margin-top: -110px;
+  }
+
+  .textContent {
+    display: flex;
+    width: 100%;
+
+    margin-top: -160px;
+
+    flex-wrap: wrap;
+    gap: 10px;
+
+    justify-content: center;
+
+    padding: 40px;
+  }
+
+  .skillDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 5px;
+
+    font-size: 1.4rem;
+
+    background-color: rgb(85, 216, 68);
+    border-radius: 30px;
+    padding: 10px;
+
+    color: rgb(255, 255, 255);
+
+    font-weight: bold;
+  }
+
+  .skillDiv img {
+    width: 38px;
+  }
+
+  .downloadButton {
+    padding-top: 10px;
+    padding-bottom: 14px;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    border-radius: 7px;
+
+    margin-top: 30px;
+
+    font-size: 1.5rem;
+
+    background-color: rgb(19, 57, 82);
+    color: white;
+    border: 6px rgb(206, 206, 206);
+    border-style: double;
+
+    cursor: pointer;
+  }
+}

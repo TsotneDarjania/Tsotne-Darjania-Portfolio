@@ -1,0 +1,35 @@
+.homePage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+
+  width: 100vw;
+  background-color: rgb(255, 255, 255);
+}
+
+.introText {
+  position: absolute;
+  left: 0;
+  right: 0;
+
+  margin-left: auto;
+  margin-right: auto;
+
+  top: 42vh;
+
+  width: 100vw;
+  height: 20vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  animation-delay: 4.5s;
+  animation-name: introAnim;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+
+  overflow-x: hidden !important;
+}

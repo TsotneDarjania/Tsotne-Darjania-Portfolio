@@ -1,0 +1,135 @@
+@import url("https://fonts.googleapis.com/css2?family=Esteban&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Audiowide&family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@300..900&display=swap");
+
+.custom-font-1 {
+  font-family: "Darker Grotesque", sans-serif;
+  font-optical-sizing: auto;
+}
+.custom-font-2 {
+  font-family: "EB Garamond", serif;
+}
+.custom-font-3 {
+  font-family: "Esteban", serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  position: absolute;
+  overflow-x: hidden;
+
+  scroll-behavior: smooth;
+}
+
+a {
+  text-decoration: none;
+  color: currentColor;
+}
+
+.mainText {
+  font-size: 2rem;
+  font-family: "Dosis", sans-serif;
+  text-align: center;
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+
+svg {
+  margin-top: -30px;
+}
+
+#code-cover-screen {
+  animation: scrollCodeIn 4s;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+@keyframes scrollCodeIn {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(180px);
+    opacity: 1;
+  }
+}
+
+#scrolling-code {
+  animation: scrollCode 3s 1.65s linear infinite;
+}
+
+#scrolling-code-2 {
+  animation: scrollCode2 3s 1.65s linear infinite;
+  transform: translateY(87px);
+}
+
+@keyframes scrollCode {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  49.99% {
+    transform: translateY(-80px);
+    opacity: 1;
+  }
+  50% {
+    transform: translatey(87px);
+    opacity: 0;
+  }
+  50.01% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes scrollCode2 {
+  0% {
+    transform: translateY(87);
+    opacity: 1;
+  }
+  49.99% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  99.98% {
+    transform: translatey(-80px);
+    opacity: 1;
+  }
+  99.99% {
+    transform: translateY(87);
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 16px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(80, 253, 103);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgb(32, 32, 34);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(237, 255, 240);
+}

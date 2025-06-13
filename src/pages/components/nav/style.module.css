@@ -1,0 +1,205 @@
+.nav {
+  position: fixed;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+
+  top: -12vh;
+
+  width: 100vw;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  max-width: 1200px;
+
+  padding: 20px 40px;
+
+  z-index: 110;
+
+  animation-delay: 0.5s;
+  animation-name: show;
+  animation-fill-mode: forwards;
+  animation-duration: 1.2s;
+
+  transition: 0.5s;
+
+  overflow: hidden;
+}
+
+.scrolled {
+  margin-top: 30px;
+  background-color: rgb(168, 255, 134);
+
+  border-radius: 50px;
+}
+
+@keyframes show {
+  0% {
+    opacity: 0;
+    top: -12vh;
+  }
+  100% {
+    top: 0px;
+    opacity: 1;
+  }
+}
+
+.menuButton {
+  position: relative;
+
+  font-size: 3rem;
+  font-weight: 600;
+  color: rgb(56, 202, 11);
+  padding: 10px 20px;
+  cursor: pointer;
+
+  background: none;
+
+  border: none;
+  transition: all 0.3s;
+}
+@media only screen and (max-width: 900px) {
+  .menuButton {
+    font-size: 1.6rem;
+  }
+}
+.menuButton::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 20%;
+  left: 0;
+  bottom: 30%;
+  background-color: rgb(251, 255, 8);
+
+  z-index: -1;
+
+  transition: all 0.3s;
+}
+.menuButton:hover::after {
+  height: 100%;
+  bottom: 0;
+}
+
+.hamburgerMenu {
+  display: none;
+}
+
+.ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+
+  width: 100%;
+}
+
+@media screen and (max-width: 1050px) {
+  .ul {
+    position: fixed;
+    left: -100vw;
+    top: 14.5vh;
+
+    width: 100vw;
+
+    height: 86vh;
+
+    padding-top: 30px;
+    padding-bottom: 30px;
+
+    background-color: rgb(253, 253, 253);
+
+    flex-direction: column;
+    display: flex;
+
+    transition: 0.3s;
+  }
+
+  .menuButton {
+    font-size: 33px;
+  }
+
+  .ulActive {
+    left: 0;
+  }
+
+  .hamburgerMenu {
+    display: block;
+
+    width: 50px;
+    height: 50px;
+
+    position: relative;
+
+    overflow: hidden;
+  }
+
+  .line1 {
+    position: absolute;
+    left: 0;
+    top: 0;
+    transition: 0.3s;
+
+    width: 100%;
+    height: 4px;
+
+    background-color: white;
+  }
+
+  .line1Active {
+    transform: rotate(45deg);
+    top: 50%;
+  }
+
+  .line2 {
+    position: absolute;
+    left: 0;
+    top: 45%;
+    transition: 0.3s;
+
+    width: 100%;
+    height: 4px;
+
+    background-color: white;
+  }
+
+  .line2Active {
+    opacity: 0;
+  }
+
+  .line3 {
+    position: absolute;
+    left: 0;
+    top: 90%;
+    transition: 0.3s;
+
+    width: 100%;
+    height: 4px;
+
+    background-color: white;
+  }
+
+  .line3Active {
+    transform: rotate(-45deg);
+    top: 50%;
+  }
+
+  .nav {
+    background-color: rgb(15, 15, 15);
+
+    justify-content: center;
+    align-items: center;
+
+    height: 15vh;
+  }
+
+  .scrolled {
+    margin-top: 0px;
+    background-color: rgb(15, 15, 15);
+
+    border-radius: 0;
+  }
+}

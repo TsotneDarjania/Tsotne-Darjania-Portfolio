@@ -1,0 +1,174 @@
+.experience {
+  margin-top: 100px;
+
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: column;
+
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
+}
+
+.content {
+  position: relative;
+  max-width: 1200px;
+
+  overflow: hidden;
+}
+
+@media only screen and (max-width: 900px) {
+  .experience {
+    padding: 10px 20px;
+  }
+}
+
+.title {
+  font-size: 4rem;
+  font-weight: 600;
+  color: rgb(26, 179, 46);
+  margin: 20px 0;
+
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+@media only screen and (max-width: 900px) {
+  .title {
+    font-size: 2rem;
+  }
+}
+
+.dottes {
+  position: absolute;
+  width: 30px;
+  height: 2900px;
+
+  top: 0;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: column;
+}
+@media only screen and (max-width: 900px) {
+  .dottes {
+    display: none;
+  }
+}
+
+.dot {
+  width: 5px;
+  height: 5px;
+  background-color: rgb(24, 27, 24);
+
+  border-radius: 50%;
+
+  margin-top: 5px;
+}
+
+.work {
+  display: flex;
+  justify-content: space-between;
+
+  width: 100%;
+
+  overflow: hidden !important;
+}
+
+.workLeftContent {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+
+  align-items: start;
+}
+@media only screen and (max-width: 900px) {
+  .workLeftContent {
+    width: 100%;
+  }
+}
+.rightWorkDescription {
+  text-align: right;
+}
+.workRightContent {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+
+  align-items: end;
+}
+.workFakeRightContent {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+
+  align-items: end;
+}
+
+.workTitle {
+  font-size: 3rem;
+  font-weight: 600;
+  color: rgb(255, 176, 73);
+}
+
+.workData {
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: rgb(129, 115, 105);
+}
+
+.workDescription {
+  font-size: 1.9rem;
+
+  color: rgb(102, 150, 102);
+
+  margin-top: 7px;
+}
+
+.workPosition {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: rgb(255, 167, 35);
+  margin-top: 7px;
+}
+
+.workTechnologies {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: rgb(44, 177, 11);
+}
+.rightWorkTechnologies {
+  font-weight: bold;
+  font-size: 1.3rem;
+  text-align: right;
+  color: rgb(44, 177, 11);
+}
+
+.workImage {
+  width: 100px;
+  height: 100px;
+
+  border-radius: 100%;
+}
+
+@media only screen and (max-width: 900px) {
+  .workRightContent {
+    width: 100%;
+  }
+  .workFakeRightContent {
+    display: none;
+  }
+
+  .workDescription {
+    font-size: 1.5rem;
+
+    color: rgb(102, 150, 102);
+
+    margin-top: 7px;
+  }
+}

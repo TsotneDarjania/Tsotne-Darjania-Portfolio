@@ -1,0 +1,170 @@
+.projects {
+  margin-top: 100px;
+
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: column;
+
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
+}
+
+.title {
+  font-size: 4rem;
+  font-weight: 600;
+  color: rgb(26, 179, 46);
+  margin: 20px 0;
+
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+@media only screen and (max-width: 1100px) {
+  .title {
+    font-size: 3.5rem;
+  }
+}
+
+.project {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: start;
+  max-width: 1200px;
+  width: 90vw;
+  margin: 20px 0;
+
+  position: relative;
+
+  margin-top: 40px;
+
+  overflow-y: hidden !important;
+  overflow-x: hidden !important;
+}
+
+.projectIntro {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  position: relative;
+
+  overflow-y: hidden !important;
+  overflow-x: hidden !important;
+}
+@media only screen and (max-width: 1100px) {
+  .projectIntro {
+    flex-direction: column;
+    align-items: center;
+  }
+  .project {
+    margin-top: 20px;
+  }
+}
+
+.projectImage {
+  width: 48%;
+  height: fit-content;
+
+  margin-top: 10px;
+  box-shadow: 8px 8px 0 rgb(12, 73, 12);
+
+  object-fit: cover;
+}
+@media only screen and (max-width: 1100px) {
+  .projectImage {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+
+.projectTitle {
+  font-size: 2.8rem;
+  font-weight: 600;
+  color: rgb(66, 212, 86);
+}
+@media only screen and (max-width: 1100px) {
+  .projectTitle {
+    font-size: 1.6rem;
+  }
+}
+
+.projectText {
+  width: 45%;
+
+  color: rgb(15, 85, 24);
+
+  font-size: 1.8rem;
+}
+@media only screen and (max-width: 1100px) {
+  .projectText {
+    width: 100%;
+    font-size: 1.5rem;
+  }
+}
+
+.projectIndicators {
+  display: flex;
+
+  justify-content: end;
+
+  width: 100%;
+
+  margin-top: 10px;
+
+  gap: 20px;
+}
+@media only screen and (max-width: 1100px) {
+  .projectIndicators {
+    display: flex;
+    width: 100%;
+    justify-content: start;
+
+    gap: 20px;
+
+    margin-top: 5px;
+  }
+}
+
+.gitHuButton {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: rgb(66, 212, 86);
+  padding: 10px 20px;
+  cursor: pointer;
+
+  width: fit-content;
+
+  position: relative;
+
+  background: none;
+
+  border: none;
+  transition: all 0.3s;
+
+  border: 2px solid rgb(66, 212, 86);
+}
+@media only screen and (max-width: 1100px) {
+  .gitHuButton {
+    font-size: 1.2rem;
+  }
+}
+.gitHuButton::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 20%;
+  left: 0;
+  bottom: 30%;
+  background-color: rgb(251, 255, 8);
+  opacity: 0.6;
+
+  z-index: -1;
+
+  transition: all 0.3s;
+}
+.gitHuButton:hover::after {
+  height: 100%;
+  bottom: 0;
+}
