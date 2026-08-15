@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tsotne Darjania — Resume</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #000000;
+    background-color: #FFFFFF;
+    max-width: 816px; /* US Letter width at 96dpi */
+    margin: 0 auto;
+    padding: 96px; /* 1-inch margins on all sides */
+    font-size: 17px;
+    line-height: 1.5;
+  }
+  @media print {
+    body {
+      padding: 0; /* print: margins come from @page */
+      max-width: none;
+    }
+    @page {
+      margin: 1in;
+      size: letter;
+    }
+  }
+  h1 {
+    font-size: 34px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 6px;
+    color: #1a4d7c;
+  }
+  .contact {
+    font-size: 17px;
+    text-align: center;
+    margin-bottom: 4px;
+  }
+  a {
+    color: #1558a7;
+    text-decoration: underline;
+  }
+  h2 {
+    font-size: 23px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #1a4d7c;
+    border-bottom: 2px solid #1a4d7c;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    padding-bottom: 3px;
+  }
+  .job-title {
+    font-size: 19px;
+    font-weight: bold;
+    margin-top: 14px;
+    color: #1a4d7c;
+  }
+  .company-line {
+    font-size: 19px;
+    margin-bottom: 6px;
+  }
+  .company-name {
+    font-weight: bold;
+    font-style: italic;
+  }
+  .meta {
+    font-size: 17px;
+    font-style: italic;
+    color: #333333;
+  }
+  ul {
+    list-style-type: disc;
+    margin-left: 22px;
+    margin-bottom: 8px;
+  }
+  li {
+    font-size: 17px;
+    line-height: 1.5;
+    margin-bottom: 4px;
+  }
+  p {
+    font-size: 17px;
+    line-height: 1.5;
+    margin-bottom: 8px;
+  }
+  .edu-school {
+    font-size: 19px;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  .edu-degree {
+    font-size: 17px;
+    margin-bottom: 4px;
+  }
+</style>
+</head>
+<body>
+
+<h1>TSOTNE DARJANIA</h1>
+<div class="contact">Tbilisi, Georgia | <a href="mailto:tsotnedarjania1997@gmail.com">tsotnedarjania1997@gmail.com</a> | +995 592 02 28 24</div>
+<div class="contact">LinkedIn: <a href="https://www.linkedin.com/in/tsotne-darjania-58380b231/">linkedin.com/in/tsotne-darjania</a> | GitHub: <a href="https://github.com/TsotneDarjania">github.com/TsotneDarjania</a> | Portfolio: <a href="https://tsotnedarjania.dev">tsotnedarjania.dev</a></div>
+
+<h2>Professional Summary</h2>
+<p>Senior Front-End and Game Developer with over 6 years of experience building high-performance web applications and interactive experiences in JavaScript/TypeScript. Deep expertise across two complementary domains: modern front-end engineering (React, Next.js, SSR/ISR, state management) and real-time graphics programming (PixiJS, Three.js, WebGL, Phaser). Proven track record of shipping products used in production at scale — from customer-facing dashboards and internal tooling to browser games running at a consistent 60 FPS on low-end mobile devices. Experienced in mentoring developers, collaborating with AI-assisted development workflows, and owning features end-to-end from architecture to performance optimization.</p>
+
+<h2>Skills</h2>
+<ul>
+  <li><b>Front-End &amp; State Management:</b> React.js, Next.js, Redux Toolkit, Zustand, React Query, SSR / ISR, Core Web Vitals optimization.</li>
+  <li><b>Languages &amp; Core Web:</b> TypeScript, JavaScript (ES6+), Python, C++, HTML5, CSS3, Tailwind CSS.</li>
+  <li><b>Game Development &amp; Graphics:</b> PixiJS, Phaser, Three.js, WebGL, Canvas API, Matter.js (Physics), GSAP.</li>
+  <li><b>Back-End, Build Tools &amp; DevOps:</b> Node.js, Webpack, Vite, ESBuild, Docker, Git, GitHub Actions, AWS.</li>
+  <li><b>Performance Engineering:</b> Rendering optimization, texture atlases, memory/GC tuning, bundle-size optimization, asset pipeline automation.</li>
+</ul>
+
+<h2>Work Experience</h2>
+
+<div class="job-title">Front-End Developer (Interactive Web Experiences)</div>
+<div class="company-line"><span class="company-name">Sett.ai</span> <span class="meta">| Tel Aviv, Israel (Remote) | May 2025 – Present</span></div>
+<ul>
+  <li>Engineer high-performance, single-file HTML5 interactive experiences for mobile marketing campaigns, working under strict technical constraints (sub-5MB self-contained builds, no external requests).</li>
+  <li>Collaborate with proprietary Agentic AI systems to rapidly generate, iterate, and refine interactive concepts, contributing to the reduction of production cycles from weeks to minutes while maintaining high creative diversity.</li>
+  <li>Optimized rendering with PixiJS and advanced Webpack configurations, implementing Base64 asset inlining to output fully self-contained builds with aggressively minimized payloads.</li>
+  <li>Analyze user-interaction telemetry in partnership with growth teams, tuning first-3-second engagement hooks and core interaction loops to measurably reduce early drop-offs and improve conversion rates.</li>
+</ul>
+
+<div class="job-title">Game Developer</div>
+<div class="company-line"><span class="company-name">Onaim</span> <span class="meta">| Remote | Jun 2024 – Apr 2025</span></div>
+<ul>
+  <li>Architected browser-based casino games using PixiJS, React, and TypeScript, delivering real-time gameplay with consistent 60 FPS performance on resource-constrained mobile devices.</li>
+  <li>Designed and implemented internal game development tools, including a custom scene editor and runtime engine for configuring dynamic layouts, animations, and visual assets.</li>
+  <li>Built automated asset loading and packaging pipelines utilizing JSON, Blob, and JSZip, which simplified game deployment processes and reduced manual integration efforts by 30%.</li>
+  <li>Optimized memory allocation, texture atlases, and garbage collection mechanisms, resulting in a substantial reduction of mobile browser crash rates.</li>
+</ul>
+
+<div class="job-title">Instructor (Full-Stack JavaScript)</div>
+<div class="company-line"><span class="company-name">Digital Institute</span> <span class="meta">| Tbilisi, Georgia | Jun 2022 – Jan 2024</span></div>
+<ul>
+  <li>Instructed full-stack JavaScript cohorts covering HTML, CSS, React.js, Next.js, Node.js, and MongoDB, facilitating live coding sessions and comprehensive code reviews.</li>
+  <li>Mentored junior developers on software architecture, clean code principles, Agile methodologies, and Git CI/CD workflows, successfully preparing them for enterprise environments.</li>
+</ul>
+
+<div class="job-title">Web Developer</div>
+<div class="company-line"><span class="company-name">Digido</span> <span class="meta">| Tbilisi, Georgia | Jun 2020 – Jan 2022</span></div>
+<ul>
+  <li>Built and maintained customer-facing dashboards and internal operational tools utilizing React, Next.js, and TypeScript.</li>
+  <li>Implemented complex UI modules including real-time charts and dynamic filtering, streamlining workflows and reducing manual data-entry tasks for the operations team.</li>
+  <li>Configured Server-Side Rendering (SSR) and Incremental Static Regeneration (ISR), optimizing application bundle sizes and enhancing Core Web Vitals and overall SEO performance.</li>
+</ul>
+
+<div class="job-title">JavaScript Software Engineer</div>
+<div class="company-line"><span class="company-name">Profair Games</span> <span class="meta">| Tbilisi, Georgia | Jan 2019 – Jun 2020</span></div>
+<ul>
+  <li>Developed interactive browser-based slot games leveraging PixiJS and Phaser, maintaining frame rate stability and smooth cross-platform animations.</li>
+  <li>Integrated Matter.js for 2D physics simulations and Three.js for 3D visual effects, designing engaging bonus rounds that extended average player session duration.</li>
+  <li>Optimized rendering pipelines and asset pre-loading strategies, reducing initial game load times by approximately 25%.</li>
+</ul>
+
+<h2>Education</h2>
+<div class="edu-school">Free University of Tbilisi <span class="meta">| Tbilisi, Georgia</span></div>
+<div class="edu-degree">Bachelor of Science in Software Engineering <span class="meta">| Sept 2018 – June 2022</span></div>
+<ul>
+  <li>Minor Certificate: Game Development</li>
+  <li>Relevant Coursework: Advanced JavaScript, Front-End Engineering, Object-Oriented Programming, API Integration.</li>
+</ul>
+
+</body>
+</html>

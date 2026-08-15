@@ -1,159 +1,194 @@
-import style from "./style.module.css";
+import { createSignal, For, Show } from "solid-js";
+
+type Demo = {
+  title: string;
+  desc: string;
+  chips: string[];
+  src: string;
+  thumb?: string;
+};
+
+// Playable ads built at Sett — each is one self-contained HTML file.
+const playables: Demo[] = [
+  {
+    title: "Colossal Beauty",
+    desc: "A complete gameplay loop — art, audio and logic — shipped as one self-contained HTML file for MRAID ad networks.",
+    chips: ["3.9 MB single file", "60 fps", "MRAID"],
+    src: "playables/colossal-beauty.html",
+  },
+  {
+    title: "Liquid Sand",
+    desc: "Real-time particle physics tuned to stay buttery-smooth on low-end mobile devices — inside an ad build.",
+    chips: ["3.0 MB single file", "Physics", "Mobile-first"],
+    src: "playables/liquid-sand.html",
+  },
+  {
+    title: "Desert Auto-Shooter",
+    desc: "An auto-shooter combat loop engineered for instant engagement — playable within the first second.",
+    chips: ["2.1 MB single file", "60 fps", "Instant load"],
+    src: "playables/desert-auto-shooter.html",
+  },
+];
+
+// Production slot games — I built the full front-end, and korgaming.com itself.
+const slots: Demo[] = [
+  {
+    title: "Gods of Olympus",
+    desc: "Feature-rich video slot with a full bonus game, running in the browser on desktop and mobile.",
+    chips: ["Base + bonus game", "Desktop & mobile"],
+    src: "https://frontend-games.staging.korgaming.com/?app=gods_of_olympus",
+    thumb: "slot-thumbs/gods-of-olympus.png",
+  },
+  {
+    title: "CandyMan",
+    desc: "Candy-themed slot with cascading animation work and a dedicated bonus round.",
+    chips: ["Base + bonus game", "Desktop & mobile"],
+    src: "https://frontend-games.staging.korgaming.com/?app=candy_man",
+    thumb: "slot-thumbs/candyman.png",
+  },
+  {
+    title: "Viking Glory",
+    desc: "Norse-themed slot with heavy animation sequences kept at a locked 60 fps.",
+    chips: ["Base + bonus game", "Desktop & mobile"],
+    src: "https://frontend-games.staging.korgaming.com/?app=viking_glory",
+    thumb: "slot-thumbs/viking-glory.png",
+  },
+];
+
+function PlayIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M8 5.14v13.72c0 .8.87 1.3 1.56.88l10.9-6.86a1.04 1.04 0 0 0 0-1.76L9.56 4.26A1.04 1.04 0 0 0 8 5.14z" />
+    </svg>
+  );
+}
+
+// Only one demo runs at a time — starting one stops whichever was playing.
+const [activeDemo, setActiveDemo] = createSignal<string | null>(null);
+
+/** Poster with a play button; mounts the iframe only after a click. */
+function DemoFrame(props: { demo: Demo; ratio: "portrait" | "landscape" }) {
+  const playing = () => activeDemo() === props.demo.src;
+  const setPlaying = (on: boolean) => setActiveDemo(on ? props.demo.src : null);
+
+  return (
+    <div class={`demo-frame demo-frame-${props.ratio}`}>
+      <Show
+        when={playing()}
+        fallback={
+          <button
+            class="demo-cover"
+            style={
+              props.demo.thumb
+                ? { "background-image": `url(${props.demo.thumb})` }
+                : undefined
+            }
+            onClick={() => setPlaying(true)}
+            aria-label={`Play ${props.demo.title}`}
+          >
+            <span class="demo-play-btn">
+              <PlayIcon />
+            </span>
+            <span class="demo-cover-hint">Tap to play</span>
+          </button>
+        }
+      >
+        <iframe
+          class="demo-iframe"
+          src={props.demo.src}
+          title={props.demo.title}
+          allow="autoplay; fullscreen"
+        />
+      </Show>
+    </div>
+  );
+}
 
 export function Projects() {
   return (
-    <div id="projects" class={style.projects}>
-      <div class={"custom-font-3 " + style.title}>Projects</div>
+    <section id="projects" class="section">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="section-num">02</span>
+          <h2 class="section-title">Play my work</h2>
+        </div>
 
-      <div data-aos="fade-up" data-aos-duration="3000" class={style.project}>
-        <div class={style.projectIntro}>
-          <img src="project-1.png" class={style.projectImage} alt="project" />
-          <p class={style.projectText + " custom-font-1"}>
-            <span class={style.projectTitle + " custom-font-3"}>
-              Guacamole (Slot Game)
-            </span>
-            <br />
-            Guacamole is a real-money slot game I worked on while developing
-            games at Profai. Built with <strong>Phaser.js</strong>, the project
-            focused on delivering smooth gameplay, dynamic animations, and a
-            responsive user experience. I was responsible for implementing the
-            core spin mechanic, including symbol logic, win detection, and
-            payout flow. The project also involved optimizing performance for
-            low-latency feedback and ensuring the game adhered to modern slot
-            game patterns and standards.
+        <p class="proj-lede" data-reveal>
+          Don't take my word for it — these are real production builds,
+          embedded live. Press play.
+        </p>
+
+        {/* --- Playable ads --- */}
+        <div class="proj-group" data-reveal>
+          <div class="proj-group-head">
+            <h3 class="proj-group-title">Playable Ads</h3>
+            <span class="proj-badge">Built at Sett</span>
+          </div>
+          <p class="proj-group-sub">
+            Complete game loops delivered as single self-contained HTML files —
+            no external requests, ready for any ad network.
           </p>
         </div>
-        <div class={style.projectIndicators}>
-          <button
-            onclick={() => {
-              window.open(
-                "https://lobby.profairgames.com/slot/0d7fac03-18de-42d4-aeb1-adc0c5a7d762?demo=true"
-              );
-            }}
-            class={style.gitHuButton + " custom-font-1"}
-          >
-            {" "}
-            Live Link{" "}
-          </button>
-        </div>
-      </div>
 
-      <div data-aos="fade-up" data-aos-duration="3000" class={style.project}>
-        <div class={style.projectIntro}>
-          <img src="project-2.png" class={style.projectImage} alt="project" />
-          <p class={style.projectText + " custom-font-1"}>
-            <span class={style.projectTitle + " custom-font-3"}>
-              Marble Arena
-            </span>
-            <br />
-            Marble Arena is a web-based 2D marble tournament simulator built
-            with <strong>Phaser.js</strong>. The platform features real-time
-            animated fixtures, live betting functionality, dynamic leaderboards,
-            and an integrated YouTube channel with over <strong>6 000</strong>{" "}
-            subscribers. I developed the full simulation engine, server-client
-            data flow, and web interface, creating a scalable system that
-            combines entertainment, competition, and community engagement.
+        <div class="playable-grid">
+          <For each={playables}>
+            {(demo, i) => (
+              <article
+                class="demo-card"
+                data-reveal
+                style={{ "--d": `${i() * 90}ms` }}
+              >
+                <DemoFrame demo={demo} ratio="portrait" />
+                <h4 class="demo-title">{demo.title}</h4>
+                <p class="demo-desc">{demo.desc}</p>
+                <div class="chip-row">
+                  <For each={demo.chips}>{(chip) => <span class="chip">{chip}</span>}</For>
+                </div>
+              </article>
+            )}
+          </For>
+        </div>
+
+        {/* --- Slot games --- */}
+        <div class="proj-group proj-group-gap" data-reveal>
+          <div class="proj-group-head">
+            <h3 class="proj-group-title">Slot Games</h3>
+            <span class="proj-badge">Front-End · KOR Gaming</span>
+          </div>
+          <p class="proj-group-sub">
+            Production casino slots where I engineered the entire front-end —
+            and{" "}
+            <a
+              class="proj-inline-link"
+              href="https://korgaming.com/en/games"
+              target="_blank"
+              rel="noopener"
+            >
+              korgaming.com
+            </a>{" "}
+            itself, where the full catalog lives.
           </p>
         </div>
-        <div class={style.projectIndicators}>
-          <button
-            onclick={() => {
-              window.open(
-                "https://github.com/TsotneDarjania/marble-arena-production"
-              );
-            }}
-            class={style.gitHuButton + " custom-font-1"}
-          >
-            GitHub
-          </button>
-          <button
-            onclick={() => {
-              window.open(
-                "https://www.youtube.com/channel/UCZ_Ulx3qid6zZtcCLT7CFKQ"
-              );
-            }}
-            class={style.gitHuButton + " custom-font-1"}
-          >
-            Youtube Channel
-          </button>
-          <button
-            onclick={() => {
-              window.open("https://m-arena.com");
-            }}
-            class={style.gitHuButton + " custom-font-1"}
-          >
-            {" "}
-            Live Link{" "}
-          </button>
-        </div>
-      </div>
 
-      <div data-aos="fade-up" data-aos-duration="3000" class={style.project}>
-        <div class={style.projectIntro}>
-          <img src="project-5.png" class={style.projectImage} alt="project" />
-          <p class={style.projectText + " custom-font-1"}>
-            <span class={style.projectTitle + " custom-font-3"}>
-              Amazing Tours - Island Travel Website
-            </span>
-            <br />
-            Created a full-featured website for <strong>Amazing Tours</strong>,
-            a company offering premium island travel experiences. Using{" "}
-            <strong>Framer</strong>, I built an intuitive and visually engaging
-            platform where users can discover, explore, and book island
-            adventures with ease.
-          </p>
-        </div>
-        <div class={style.projectIndicators}>
-          <button
-            onclick={() => {
-              window.open("https://www.amazingtours.is/");
-            }}
-            class={style.gitHuButton + " custom-font-1"}
-          >
-            Live Link
-          </button>
+        <div class="slot-grid">
+          <For each={slots}>
+            {(demo, i) => (
+              <article
+                class="demo-card"
+                data-reveal
+                style={{ "--d": `${i() * 90}ms` }}
+              >
+                <DemoFrame demo={demo} ratio="landscape" />
+                <h4 class="demo-title">{demo.title}</h4>
+                <p class="demo-desc">{demo.desc}</p>
+                <div class="chip-row">
+                  <For each={demo.chips}>{(chip) => <span class="chip">{chip}</span>}</For>
+                </div>
+              </article>
+            )}
+          </For>
         </div>
       </div>
-
-      <div data-aos="fade-up" data-aos-duration="3000" class={style.project}>
-        <div class={style.projectIntro}>
-          <img
-            src="project-6.png"
-            class={style.projectImage}
-            alt="Penalty Game"
-          />
-          <p class={style.projectText + " custom-font-1"}>
-            <span class={style.projectTitle + " custom-font-3"}>
-              Penalty Game - Casino-Style Browser Game
-            </span>
-            <br />
-            Developed a high-performance, browser-based penalty shootout game at{" "}
-            <strong>Onaim</strong> using <strong>PixiJS</strong>,{" "}
-            <strong>TypeScript</strong>, and <strong>JavaScript</strong>.
-            Designed with a modular architecture and responsive UI, the game
-            features smooth animations and a real-time betting experience for
-            casino platforms.
-          </p>
-        </div>
-        <div class={style.projectIndicators}>
-          <button
-            onclick={() => {
-              window.open("https://penalty-game-pi.vercel.app/"); // Replace with actual URL
-            }}
-            class={style.gitHuButton + " custom-font-1"}
-          >
-            Live Link
-          </button>
-          <button
-            onclick={() => {
-              window.open("https://github.com/TsotneDarjania/penalty-game");
-            }}
-            class={style.gitHuButton + " custom-font-1"}
-          >
-            GitHub
-          </button>
-        </div>
-      </div>
-    </div>
+    </section>
   );
 }

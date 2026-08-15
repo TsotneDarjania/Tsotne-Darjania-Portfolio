@@ -1,126 +1,113 @@
-import style from "./style.module.css";
+import { For } from "solid-js";
+
+type Job = {
+  period: string;
+  role: string;
+  company: string;
+  location: string;
+  points: string[];
+  tags: string[];
+};
+
+/** Source of truth: Tsotne_Darjania resume (2026). */
+const jobs: Job[] = [
+  {
+    period: "May 2025 — Present",
+    role: "Front-End Developer, Interactive Web Experiences",
+    company: "Sett.ai",
+    location: "Tel Aviv, Israel · Remote",
+    points: [
+      "Engineer high-performance, single-file HTML5 interactives for mobile marketing campaigns — sub-5MB self-contained builds with zero external requests.",
+      "Collaborate with proprietary Agentic AI systems to generate and refine interactive concepts, cutting production cycles from weeks to minutes.",
+      "Optimize rendering with PixiJS and advanced Webpack configs (Base64 asset inlining, aggressively minimized payloads).",
+      "Tune first-3-second engagement hooks from user-interaction telemetry, measurably reducing early drop-offs and improving conversion.",
+    ],
+    tags: ["Agentic AI", "MRAID 3.0", "PixiJS", "Webpack"],
+  },
+  {
+    period: "Jun 2024 — Apr 2025",
+    role: "Game Developer",
+    company: "Onaim",
+    location: "Remote",
+    points: [
+      "Architected browser-based casino games with PixiJS, React and TypeScript, holding a consistent 60 FPS on low-end mobile devices.",
+      "Built internal tooling — a custom scene editor and runtime engine for configuring dynamic layouts, animations and visual assets.",
+      "Automated asset loading/packaging pipelines (JSON, Blob, JSZip), reducing manual integration effort by ~30%.",
+      "Tuned memory allocation, texture atlases and GC behaviour, substantially cutting mobile browser crash rates.",
+    ],
+    tags: ["PixiJS", "React", "TypeScript", "60 FPS"],
+  },
+  {
+    period: "Jun 2022 — Jan 2024",
+    role: "Instructor, Full-Stack JavaScript",
+    company: "Digital Institute",
+    location: "Tbilisi, Georgia",
+    points: [
+      "Taught full-stack JavaScript cohorts — HTML, CSS, React, Next.js, Node.js, MongoDB — through live coding sessions and code reviews.",
+      "Mentored junior developers on architecture, clean code, Agile and Git CI/CD workflows, preparing them for enterprise environments.",
+    ],
+    tags: ["Mentorship", "React", "Node.js"],
+  },
+  {
+    period: "Jun 2020 — Jan 2022",
+    role: "Web Developer",
+    company: "Digido",
+    location: "Tbilisi, Georgia",
+    points: [
+      "Built customer-facing dashboards and internal operational tools with React, Next.js and TypeScript.",
+      "Shipped complex UI modules — real-time charts, dynamic filtering — streamlining operations workflows.",
+      "Configured SSR and ISR, trimming bundle sizes and lifting Core Web Vitals and SEO performance.",
+    ],
+    tags: ["Next.js", "SSR / ISR", "Dashboards"],
+  },
+  {
+    period: "Jan 2019 — Jun 2020",
+    role: "JavaScript Software Engineer",
+    company: "Profair Games",
+    location: "Tbilisi, Georgia",
+    points: [
+      "Developed HTML5 slot games with PixiJS and Phaser — stable frame rates and smooth cross-platform animation.",
+      "Integrated Matter.js physics and Three.js 3D effects into bonus rounds that extended average session duration.",
+      "Optimized rendering pipelines and asset preloading, cutting initial load times by ~25%.",
+    ],
+    tags: ["Phaser", "Matter.js", "Slot Games"],
+  },
+];
 
 export default function Experience() {
   return (
-    <div id="experience" class={style.experience}>
-      <div class={"custom-font-3 " + style.title}>Experience</div>
-      <div class={style.content}>
-        {/* Left */}
-        <div data-aos="fade-right" class={style.work}>
-          <div class={style.workLeftContent}>
-            <img
-              class={style.workImage}
-              src="profairgames.jpg"
-              alt="ProFairGames"
-            />
-            <h2 class={style.workTitle + " custom-font-1"}>Profair Games</h2>
-            <p class={style.workData + " custom-font-1"}> 2018 - 2020 </p>
-
-            <p class={style.workDescription + " custom-font-1"}>
-              At Profair Game, I started as an intern and progressed to a
-              JavaScript Developer role. I worked on a browser-based gambling
-              game, utilizing Phaser.js and Three.js for game development. My
-              responsibilities included developing dynamic game features,
-              optimizing performance, and collaborating with a team to deliver
-              engaging gaming experiences.
-            </p>
-            <p class={style.workPosition + " custom-font-1"}>
-              Position: Javascript Developer
-            </p>
-            <p class={style.workTechnologies + " custom-font-1"}>
-              Technologies: JavaScript, Phaser.js, Three.js, Node.js, Nest JS,
-              MongoDB
-            </p>
-          </div>
+    <section id="experience" class="section">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="section-num">03</span>
+          <h2 class="section-title">Experience</h2>
         </div>
 
-        {/* Right */}
-        <div data-aos="fade-left" class={style.work}>
-          <div class={style.workFakeRightContent}> </div>
-          <div class={style.workRightContent}>
-            <img class={style.workImage} src="digital.jpg" alt="ProFairGames" />
-            <h2 class={style.workTitle + " custom-font-1"}>
-              Digital Institute
-            </h2>
-            <p class={style.workData + " custom-font-1"}> 2020-2022 </p>
-            <p class={style.workDescription + " custom-font-1"}>
-              Digital Institute is a leading educational institution
-              specializing in tech training. As an Instructor, I taught courses
-              on Node.js, React, and Networking Basics. My role involved
-              creating detailed curriculum, delivering lectures, and guiding
-              students through practical projects to build their skills in these
-              areas.
-            </p>
-            <p class={style.workPosition + " custom-font-1"}>
-              Position: Instructor
-            </p>
-            <p class={style.workTechnologies + " custom-font-1"}>
-              Technologies: Node.js, React, JavaScript, Networking Concepts
-            </p>
-          </div>
-        </div>
-
-        {/* Left */}
-        <div data-aos="fade-right" class={style.work}>
-          <div class={style.workLeftContent}>
-            <img class={style.workImage} src="digido.jpg" alt="ProFairGames" />
-            <h2 class={style.workTitle + " custom-font-1"}>DIGIDO</h2>
-            <p class={style.workData + " custom-font-1"}> 2022 - 2024</p>
-
-            <p class={style.workDescription + " custom-font-1"}>
-              Digido is a company specializing in cutting-edge web development
-              solutions. As a Web Developer, I worked on developing and
-              maintaining websites using Next.js and Framer. My responsibilities
-              included creating responsive web applications, optimizing
-              performance, and ensuring a seamless user experience.
-            </p>
-            <p class={style.workPosition + " custom-font-1"}>
-              Position: Web Developer
-            </p>
-            <p class={style.workTechnologies + " custom-font-1"}>
-              Technologies: Node JS, Express JS, Next.js, Framer, TypeScript,
-              Supabase
-            </p>
-          </div>
-        </div>
-
-        {/* Right */}
-        <div data-aos="fade-left" class={style.work}>
-          <div class={style.workFakeRightContent}> </div>
-          <div class={style.workRightContent}>
-            <img
-              class={style.workImage}
-              src="onaim_logo.jpg"
-              alt="ProFairGames"
-            />
-            <h2 class={style.workTitle + " custom-font-1"}>OnAim</h2>
-            <p class={style.workData + " custom-font-1"}> 2024 - Present</p>
-            <p class={style.workDescription + " custom-font-1"}>
-              Worked as a browser game developer at <strong>onAim</strong>,
-              focusing on real-time web games using
-              <strong> Phaser.js</strong>, <strong>PixiJS</strong>, and{" "}
-              <strong>TypeScript</strong>. Built and optimized gameplay
-              mechanics, interactive animations, and multiplayer systems for a
-              variety of online games.
-            </p>
-            <p class={style.workPosition + " custom-font-1"}>
-              Position: Game Developer
-            </p>
-            <p class={style.workTechnologies + " custom-font-1"}>
-              Pixi JS, Phaser JS, JavaScript, TypeScript
-            </p>
-          </div>
-        </div>
-        {/* Dottes */}
-        <div class={style.dottes}>
-          {
-            // Dottes
-            Array.from({ length: 270 }, (_, i) => (
-              <div class={style.dot} />
-            ))
-          }
+        <div class="timeline">
+          <For each={jobs}>
+            {(job, i) => (
+              <article
+                class="tl-item"
+                data-reveal
+                style={{ "--d": `${Math.min(i() * 70, 280)}ms` }}
+              >
+                <span class="tl-dot" />
+                <p class="tl-period">{job.period}</p>
+                <h3 class="tl-role">{job.role}</h3>
+                <p class="tl-company">
+                  <b>{job.company}</b> · {job.location}
+                </p>
+                <ul class="tl-points">
+                  <For each={job.points}>{(point) => <li>{point}</li>}</For>
+                </ul>
+                <div class="tl-tags">
+                  <For each={job.tags}>{(tag) => <span class="tl-tag">{tag}</span>}</For>
+                </div>
+              </article>
+            )}
+          </For>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

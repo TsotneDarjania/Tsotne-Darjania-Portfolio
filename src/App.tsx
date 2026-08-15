@@ -1,22 +1,29 @@
-import { onMount, type Component } from "solid-js";
-import AOS from "aos";
+import { onCleanup, onMount, type Component } from "solid-js";
 
-import styles from "./App.module.css";
 import HomePage from "./pages/homepage";
-import "aos/dist/aos.css"; // Import AOS styles
+import { Intro } from "./pages/components/intro";
+import { initParallax, initReveal, initSmoothScroll } from "./lib/fx";
 
 const App: Component = () => {
+  const disposers: Array<() => void> = [];
+
   onMount(() => {
-    AOS.init({
-      duration: 800, // optional: sets animation duration
-      once: true, // optional: only animate once
-    });
+    disposers.push(initParallax());
   });
 
+  // Scroll reveals + smooth scrolling start only after the intro curtain
+  // lifts, so the hero staggers in right as the page is uncovered.
+  const onIntroDone = () => {
+    disposers.push(initReveal(), initSmoothScroll());
+  };
+
+  onCleanup(() => disposers.forEach((fn) => fn()));
+
   return (
-    <div class={styles.App}>
+    <>
+      <Intro onDone={onIntroDone} />
       <HomePage />
-    </div>
+    </>
   );
 };
 
