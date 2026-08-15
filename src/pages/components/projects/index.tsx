@@ -1,4 +1,4 @@
-import { createSignal, For, Show } from "solid-js";
+import { createSignal, For, onCleanup, onMount, Show } from "solid-js";
 
 type Demo = {
   title: string;
@@ -36,21 +36,21 @@ const slots: Demo[] = [
     title: "Gods of Olympus",
     desc: "Feature-rich video slot with a full bonus game, running in the browser on desktop and mobile.",
     chips: ["Base + bonus game", "Desktop & mobile"],
-    src: "https://frontend-games.staging.korgaming.com/?app=gods_of_olympus",
+    src: "slots/index.html?app=gods_of_olympus",
     thumb: "slot-thumbs/gods-of-olympus.png",
   },
   {
     title: "CandyMan",
     desc: "Candy-themed slot with cascading animation work and a dedicated bonus round.",
     chips: ["Base + bonus game", "Desktop & mobile"],
-    src: "https://frontend-games.staging.korgaming.com/?app=candy_man",
+    src: "slots/index.html?app=candy_man",
     thumb: "slot-thumbs/candyman.png",
   },
   {
     title: "Viking Glory",
     desc: "Norse-themed slot with heavy animation sequences kept at a locked 60 fps.",
     chips: ["Base + bonus game", "Desktop & mobile"],
-    src: "https://frontend-games.staging.korgaming.com/?app=viking_glory",
+    src: "slots/index.html?app=viking_glory",
     thumb: "slot-thumbs/viking-glory.png",
   },
 ];
@@ -66,8 +66,26 @@ function PlayIcon() {
 // Only one demo runs at a time — starting one stops whichever was playing.
 const [activeDemo, setActiveDemo] = createSignal<string | null>(null);
 
+// Slot games open in a fullscreen modal instead of playing inline.
+const [slotModal, setSlotModal] = createSignal<Demo | null>(null);
+
+function openSlotModal(demo: Demo) {
+  setActiveDemo(null);
+  setSlotModal(demo);
+  document.documentElement.style.overflow = "hidden";
+}
+
+function closeSlotModal() {
+  setSlotModal(null);
+  document.documentElement.style.overflow = "";
+}
+
 /** Poster with a play button; mounts the iframe only after a click. */
-function DemoFrame(props: { demo: Demo; ratio: "portrait" | "landscape" }) {
+function DemoFrame(props: {
+  demo: Demo;
+  ratio: "portrait" | "landscape";
+  onPlay?: () => void;
+}) {
   const playing = () => activeDemo() === props.demo.src;
   const setPlaying = (on: boolean) => setActiveDemo(on ? props.demo.src : null);
 
@@ -83,7 +101,7 @@ function DemoFrame(props: { demo: Demo; ratio: "portrait" | "landscape" }) {
                 ? { "background-image": `url(${props.demo.thumb})` }
                 : undefined
             }
-            onClick={() => setPlaying(true)}
+            onClick={() => (props.onPlay ? props.onPlay() : setPlaying(true))}
             aria-label={`Play ${props.demo.title}`}
           >
             <span class="demo-play-btn">
@@ -105,6 +123,17 @@ function DemoFrame(props: { demo: Demo; ratio: "portrait" | "landscape" }) {
 }
 
 export function Projects() {
+  onMount(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeSlotModal();
+    };
+    window.addEventListener("keydown", onKey);
+    onCleanup(() => {
+      window.removeEventListener("keydown", onKey);
+      closeSlotModal();
+    });
+  });
+
   return (
     <section id="projects" class="section">
       <div class="container">
@@ -178,7 +207,11 @@ export function Projects() {
                 data-reveal
                 style={{ "--d": `${i() * 90}ms` }}
               >
-                <DemoFrame demo={demo} ratio="landscape" />
+                <DemoFrame
+                  demo={demo}
+                  ratio="landscape"
+                  onPlay={() => openSlotModal(demo)}
+                />
                 <h4 class="demo-title">{demo.title}</h4>
                 <p class="demo-desc">{demo.desc}</p>
                 <div class="chip-row">
@@ -189,6 +222,35 @@ export function Projects() {
           </For>
         </div>
       </div>
+
+      {/* Fullscreen slot modal — dark overlay, click outside or Esc to close */}
+      <Show when={slotModal()}>
+        <div class="slot-modal-overlay" onClick={closeSlotModal}>
+          <div class="slot-modal" onClick={(e) => e.stopPropagation()}>
+            <div class="slot-modal-head">
+              <span class="slot-modal-title">{slotModal()!.title}</span>
+              <button
+                class="slot-modal-close"
+                onClick={closeSlotModal}
+                aria-label="Close"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+                  <path d="M18 6 6 18" />
+                  <path d="m6 6 12 12" />
+                </svg>
+              </button>
+            </div>
+            <div class="slot-modal-frame">
+              <iframe
+                class="demo-iframe"
+                src={slotModal()!.src}
+                title={slotModal()!.title}
+                allow="autoplay; fullscreen"
+              />
+            </div>
+          </div>
+        </div>
+      </Show>
     </section>
   );
 }
