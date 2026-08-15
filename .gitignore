@@ -26,6 +26,3 @@ gitignore
 # System Files
 .DS_Store
 Thumbs.db
-
-# Slot engine builds - too heavy for git, uploaded to the server separately
-public/slots/
