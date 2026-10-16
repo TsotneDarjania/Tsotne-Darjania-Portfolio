@@ -1,4 +1,5 @@
-import { createSignal, For, onCleanup, onMount, Show } from "solid-js";
+import { createEffect, createSignal, For, onCleanup, onMount, Show } from "solid-js";
+import { loadOf, preload, preloadInBackground } from "./preload";
 
 type Demo = {
   title: string;
@@ -6,6 +7,8 @@ type Demo = {
   chips: string[];
   src: string;
   thumb?: string;
+  /** Size of the HTML file — for the loading progress when the server sends it gzipped */
+  bytes?: number;
 };
 
 // Playable ads built at Sett — each is one self-contained HTML file.
@@ -15,18 +18,21 @@ const playables: Demo[] = [
     desc: "A complete gameplay loop — art, audio and logic — shipped as one self-contained HTML file for MRAID ad networks.",
     chips: ["3.9 MB single file", "60 fps", "MRAID"],
     src: "playables/colossal-beauty.html",
+    bytes: 3_995_397,
   },
   {
-    title: "Liquid Sand",
-    desc: "Real-time particle physics tuned to stay buttery-smooth on low-end mobile devices — inside an ad build.",
-    chips: ["3.0 MB single file", "Physics", "Mobile-first"],
-    src: "playables/liquid-sand.html",
+    title: "Block Buster",
+    desc: "A relaxing sliding-block puzzle — swipe the bricks to clear the board, no timer, no stress — tuned to feel instant on low-end phones.",
+    chips: ["3.0 MB single file", "Puzzle", "Mobile-first"],
+    src: "playables/block-buster.html",
+    bytes: 3_065_436,
   },
   {
     title: "Desert Auto-Shooter",
     desc: "An auto-shooter combat loop engineered for instant engagement — playable within the first second.",
     chips: ["2.1 MB single file", "60 fps", "Instant load"],
     src: "playables/desert-auto-shooter.html",
+    bytes: 2_149_879,
   },
 ];
 
@@ -80,7 +86,43 @@ function closeSlotModal() {
   document.documentElement.style.overflow = "";
 }
 
-/** Poster with a play button; mounts the iframe only after a click. */
+const mb = (bytes: number) => (bytes / 1_048_576).toFixed(1);
+
+/** Shown inside the frame while a demo is still downloading. */
+function DemoLoader(props: { title: string; loaded: number; total: number }) {
+  const R = 46, C = 2 * Math.PI * R;
+  const pct = () => Math.min(99, Math.floor((props.loaded / Math.max(1, props.total)) * 100));
+  return (
+    <div class="demo-loader" role="progressbar" aria-valuenow={pct()} aria-valuemin={0} aria-valuemax={100}>
+      <div class="demo-loader-ring">
+        <svg viewBox="0 0 120 120" aria-hidden="true">
+          <circle class="demo-loader-track" cx="60" cy="60" r={R} />
+          <circle
+            class="demo-loader-arc"
+            cx="60"
+            cy="60"
+            r={R}
+            stroke-dasharray={String(C)}
+            stroke-dashoffset={String(C * (1 - pct() / 100))}
+          />
+        </svg>
+        <span class="demo-loader-pct">
+          {pct()}
+          <small>%</small>
+        </span>
+      </div>
+      <span class="demo-loader-title">{props.title}</span>
+      <span class="demo-loader-meta">
+        Loading game · {mb(props.loaded)} / {mb(props.total)} MB
+      </span>
+      <span class="demo-loader-bar">
+        <span style={{ width: `${pct()}%` }} />
+      </span>
+    </div>
+  );
+}
+
+/** Poster with a play button; the game (preloaded in the background) opens on click. */
 function DemoFrame(props: {
   demo: Demo;
   ratio: "portrait" | "landscape";
@@ -88,6 +130,14 @@ function DemoFrame(props: {
 }) {
   const playing = () => activeDemo() === props.demo.src;
   const setPlaying = (on: boolean) => setActiveDemo(on ? props.demo.src : null);
+  const load = () => loadOf(props.demo.src);
+  // Downloaded copy if we have one; the plain URL if there's nothing to preload or it failed
+  const frameSrc = () => (!props.demo.bytes || load()?.failed ? props.demo.src : load()?.url);
+
+  // Clicked before the background download reached it — fetch this one right away
+  createEffect(() => {
+    if (playing() && props.demo.bytes) preload(props.demo.src, props.demo.bytes);
+  });
 
   return (
     <div class={`demo-frame demo-frame-${props.ratio}`}>
@@ -108,21 +158,40 @@ function DemoFrame(props: {
               <PlayIcon />
             </span>
             <span class="demo-cover-hint">Tap to play</span>
+            <Show when={props.demo.bytes && load()?.url}>
+              <span class="demo-ready">Ready · instant start</span>
+            </Show>
           </button>
         }
       >
-        <iframe
-          class="demo-iframe"
-          src={props.demo.src}
-          title={props.demo.title}
-          allow="autoplay; fullscreen"
-        />
+        <Show
+          when={frameSrc()}
+          fallback={
+            <DemoLoader
+              title={props.demo.title}
+              loaded={load()?.loaded ?? 0}
+              total={load()?.total || props.demo.bytes || 1}
+            />
+          }
+        >
+          {(src) => (
+            <iframe
+              class="demo-iframe demo-iframe-in"
+              src={src()}
+              title={props.demo.title}
+              allow="autoplay; fullscreen"
+            />
+          )}
+        </Show>
       </Show>
     </div>
   );
 }
 
 export function Projects() {
+  // Start pulling the playables in the background as soon as the site has loaded
+  preloadInBackground(playables.map((d) => ({ src: d.src, bytes: d.bytes ?? 0 })));
+
   onMount(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") closeSlotModal();
